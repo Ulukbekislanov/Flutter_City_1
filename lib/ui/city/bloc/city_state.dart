@@ -20,4 +20,15 @@ final class LoadedCitiesState extends CityState {
   List<Object?> get props => [citiesList];
 }
 
+final class LoadedTemperatureState extends CityState{
+    LoadedTemperatureState({required this.temperatureModels});
+  final TemperatureModels temperatureModels;
+
+  @override
+  List<Object?> get props => [temperatureModels];
+
+
+}
+
+
 final class ErrorCitiesState extends CityState {}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_17/data/models/city_params_model.dart';
-// Убедитесь, что импортируете bloc только один раз из правильного пути
-import 'package:flutter_application_17/ui/city/bloc/city_bloc.dart'; 
+import 'package:flutter_application_17/ui/city/bloc/city_bloc.dart';
+import 'package:flutter_application_17/ui/temperature/temperature_page.dart'; 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CityPage extends StatefulWidget {
@@ -55,8 +55,17 @@ class _CityPageState extends State<CityPage> {
                 itemCount: state.citiesList.length,
                 itemBuilder: (context, index) {
 
-                  return Column(
-                    mainAxisSize: MainAxisSize.min, 
+
+
+                  return InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TemperaturePage(
+                        latitude: state.citiesList[index].lat,
+                        longitude: state.citiesList[index].lon,
+                      ),
+                      )
+                      );
+                    },child: Column(
                     children: [
                       Text(
                         state.citiesList[index].name,
@@ -69,7 +78,10 @@ class _CityPageState extends State<CityPage> {
                       ),
                       const Divider(),  
                     ],
+                  )
                   );
+                  
+                  
                 },
               );
             }

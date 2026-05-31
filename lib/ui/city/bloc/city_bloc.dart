@@ -3,6 +3,8 @@ import 'dart:developer'
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_application_17/data/models/city_params_model.dart';
+import 'package:flutter_application_17/data/models/temperature_models.dart';
+import 'package:flutter_application_17/data/models/temperature_params_model.dart';
 import 'package:flutter_application_17/data/weather_api_service.dart';
 import 'package:flutter_application_17/data/models/city_model.dart';
 
@@ -27,6 +29,15 @@ class CityBloc extends Bloc<CityEvent, CityState> {
           stackTrace: stackTrace,
         );
 
+        emit(ErrorCitiesState());
+      }
+    });
+    on<TemperatureCityEvent>((event,emit)async{
+      try{
+        emit(LoadingCitiesState());
+      final TemperatureModels temperature = await apiService.getTemperature(event.temperature);
+      emit(LoadedTemperatureState(temperatureModels: temperature));
+      }catch(error, stackTrace){
         emit(ErrorCitiesState());
       }
     });

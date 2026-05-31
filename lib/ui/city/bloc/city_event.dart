@@ -16,3 +16,14 @@ final class SearchCityEvent extends CityEvent {
   @override
   List<Object?> get props => [params];
 }
+final class TemperatureCityEvent extends CityEvent{
+
+    TemperatureCityEvent({required this.temperature});
+
+final TemperatureParamsModel temperature;
+
+
+
+@override
+  List<Object?> get props => [temperature];
+}
